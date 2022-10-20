@@ -5,6 +5,11 @@ app = Flask(__name__)
 
 VERIFY_TOKEN = "anderson"
 
+@app.route('/')
+def index():
+    return "Hello Conexion establecida"
+
+
 @app.route('/webhook', methods = ['POST', 'GET'])
 def verify():
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
