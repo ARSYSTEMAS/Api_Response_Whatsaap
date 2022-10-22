@@ -25,8 +25,8 @@ def send_msg(msg):
                              json=json_data)
     print(response.text)
 
-
 @app.route('/webhook', methods = ['POST', 'GET'])
+
 def verify():
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
         if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
@@ -36,19 +36,21 @@ def verify():
     return "Hello world", 200
 
 
-@app.route('/recibir', methods=['POST', 'GET'])
 def webhook():
-    print("1. ",request)
     res = request.get_json()
-    req = request.get_json(silent=True, force=True)
-    print("2 . ",res)
-    print("3 - ",json.dumps(req, indent=4))
+    print(res)
+    print(json.dumps(res, indent= 4 ))
     try:
         if res['entry'][0]['changes'][0]['value']['messages'][0]['id']:
-            send_msg("gracias por responder OK")
+            msg_body = res["entry"][0]["changes"][0]["value"]["messages"][0]["text"]["body"]
+            send_msg("\ud83e\udd1a gracias por responder, tu mensaje es: " + msg_body)
     except:
         pass
     return '200 OK HTTPS.'
+
+
+
+
 
 
 if __name__ == '__main__':
