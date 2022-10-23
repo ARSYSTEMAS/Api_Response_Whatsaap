@@ -3,8 +3,10 @@ import requests
 
 app = Flask(__name__)
 
-VERIFY_TOKEN = "anderson"
-TOKEN =  "Bearer EAAI0NrVoYQoBAEPdni6XZCRF1BRq5ZBY93cEUsFnOlGl5qxZAmDZCdVvKcWdA1BSEpzUZCsHZAGPW2W1GKFqL4kZBB8TZCPHETlKas2oC5abaZBUMITqi2gRsOrpaZBPTorW0nSxw5Q5ci5ZAYLpZAy7RqVG1TqfulMngjaUT4lPSuaGAxb8dsEPfdOn"
+
+VERIFY_TOKEN = ""
+TOKEN =  ""
+
 @app.route('/')
 def index():
     return "Hello Conexion establecida"
