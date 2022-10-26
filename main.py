@@ -53,16 +53,6 @@ def send_msg(msg,msg_from):
 
 @app.route('/webhook', methods = ['POST', 'GET'])
 
-# CONEXION CON WEEBHOOK CONFIGURATION METODO GET
-def verify():
-    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
-            return "Verification token mismatch", 403
-        return request.args["hub.challenge"], 200
-
-    return "WebHook Configurado...", 200
-
-
 # METODO POST RESPUESTA AL MENSAJE CLIENTE
 def webhook():
     res = request.get_json()
@@ -78,7 +68,14 @@ def webhook():
         pass
     return '200'
 
+# CONEXION CON WEEBHOOK CONFIGURATION METODO GET
+def verify():
+    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
+            return "Verification token mismatch", 403
+        return request.args["hub.challenge"], 200
 
+    return "WebHook Configurado...", 200
 
 
 if __name__ == '__main__':
