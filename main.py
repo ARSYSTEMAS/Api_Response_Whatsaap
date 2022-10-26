@@ -25,8 +25,9 @@ creador,fecha_creacion,nombre_Bot,edad_bot,desc_bot = datos_Bot
 info = f'Hola mi nombre es {nombre_Bot} soy un {desc_bot} codificado a partir del dia {fecha_creacion} por {creador} '
 
 
-VERIFY_TOKEN = ""
-TOKEN = ""
+VERIFY_TOKEN = "anderson"
+TOKEN = "Bearer EAAI0NrVoYQoBAMyB7NLSXDyYj1ejIIfK3Bc4A8sg3nFH0ohNEBxs6J83ZCPWJZCaAIvRFzgwkZB92v5BOyO6tUsl7b5aOGlc1RqWpDEPYtzfAmlbagpqPiIMis99cRuHIdeIKOoUDZB7xZBepqBZBHbAypXwGFPqfWfvqjICZAHrvVp8HZCsDGVh"
+
 
 
 @app.route('/')
@@ -52,6 +53,15 @@ def send_msg(msg,msg_from):
 
 @app.route('/webhook', methods = ['POST', 'GET'])
 
+# CONEXION CON WEEBHOOK CONFIGURATION METODO GET
+def verify():
+    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
+            return "Verification token mismatch", 403
+        return request.args["hub.challenge"], 200
+
+    return "WebHook Configurado...", 200
+
 
 # METODO POST RESPUESTA AL MENSAJE CLIENTE
 def webhook():
@@ -69,14 +79,7 @@ def webhook():
     return '200'
 
 
-# CONEXION CON WEEBHOOK CONFIGURATION METODO GET
-def verify():
-    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
-            return "Verification token mismatch", 403
-        return request.args["hub.challenge"], 200
 
-    return "WebHook Configurado...", 200
 
 if __name__ == '__main__':
     app.run(debug=True)
