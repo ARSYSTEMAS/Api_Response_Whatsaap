@@ -65,7 +65,7 @@ def send_msg(msg,msg_from):
                         {
                             "type": "image",
                             "image": {
-                                "link": "https://digitallzoneve.com/wp-content/uploads/2021/07/4-600x600-1.jpg"
+                                "link": "https://arsystema.herokuapp.com/img/persona.jpg"
                             }
                         }
                     ]
