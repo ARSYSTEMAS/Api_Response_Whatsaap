@@ -65,7 +65,7 @@ def send_msg(msg,msg_from):
                         {
                             "type": "image",
                             "image": {
-                                "link": "https://arsystema.herokuapp.com/img/persona.jpg"
+                                "link": "https://digitallzoneve.com/wp-content/uploads/2021/07/4-600x600-1.jpg"
                             }
                         }
                     ]
@@ -111,7 +111,7 @@ def send_msg(msg,msg_from):
     }
 
     response_link = requests.post('https://graph.facebook.com/v13.0/105609815670329/messages', headers=headers,
-                             json=template_Image)
+                             json=json_data)
 
 @app.route('/webhook', methods = ['POST', 'GET'])
 
