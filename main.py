@@ -47,36 +47,102 @@ def send_msg(msg,msg_from):
             "body": msg
         }
     }
+    #"link": "https://digitallzoneve.com/wp-content/uploads/2021/07/4-600x600-1.jpg"
+    template_Image = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": "584120420838",
+        "type": "template",
+        "template": {
+            "name": "products",
+            "language": {
+                "code": "es"
+            },
+            "components": [
+                {
+                    "type": "header",
+                    "parameters": [
+                        {
+                            "type": "image",
+                            "image": {
+                                "link": "https://digitallzoneve.com/wp-content/uploads/2021/07/4-600x600-1.jpg"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "currency",
+                            "currency": {
+                                "fallback_value": 150,
+                                "code": "USD",
+                                "amount_1000": 15
+                            }
+                        },
+
+                    ]
+                },
+                {
+                    "type": "button",
+                    "sub_type": "quick_reply",
+                    "index": "0",
+                    "parameters": [
+                        {
+                            "type": "payload",
+                            "payload": "a"
+                        }
+                    ]
+                },
+                {
+                    "type": "button",
+                    "sub_type": "quick_reply",
+                    "index": "1",
+                    "parameters": [
+                        {
+                            "type": "payload",
+                            "payload": "b"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
 
     response_link = requests.post('https://graph.facebook.com/v13.0/105609815670329/messages', headers=headers,
-                             json=json_data)
+                             json=template_Image)
 
 @app.route('/webhook', methods = ['POST', 'GET'])
 
 # METODO POST RESPUESTA AL MENSAJE CLIENTE
 def webhook():
-    res = request.get_json()
-    print(res)
-    print(json.dumps(res, indent=4))
-    try:
-        if res['entry'][0]['changes'][0]['value']['messages'][0]['id']:
-            msg_body = res["entry"][0]["changes"][0]["value"]["messages"][0]["text"]["body"]
-            telf_from = res["entry"][0]["changes"][0]["value"]["messages"][0]["from"]
-            responseBot = bot.get_response(msg_body)
-            send_msg(responseBot,telf_from)
-    except:
-        pass
-    return '200'
 
-# CONEXION CON WEEBHOOK CONFIGURATION METODO GET
-def verify():
-    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
-            return "Verification token mismatch", 403
-        return request.args["hub.challenge"], 200
+    if request.method == 'GET':
+        # CONEXION CON WEEBHOOK CONFIGURATION METODO GET
+        if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+            if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
+                return "Verification token mismatch", 403
+            return request.args["hub.challenge"], 200
 
-    return "WebHook Configurado...", 200
+        return "WebHook Configurado...", 200
 
+
+    elif request.method == 'POST':
+
+        res = request.get_json()
+        print(res)
+        print(json.dumps(res, indent=4))
+        try:
+
+            if res['entry'][0]['changes'][0]['value']['messages'][0]['id']:
+                msg_body = res["entry"][0]["changes"][0]["value"]["messages"][0]["text"]["body"]
+                telf_from = res["entry"][0]["changes"][0]["value"]["messages"][0]["from"]
+                responseBot = bot.get_response(msg_body)
+                send_msg(responseBot,telf_from)
+        except:
+            pass
+        return '200'
 
 if __name__ == '__main__':
     app.run(debug=True)

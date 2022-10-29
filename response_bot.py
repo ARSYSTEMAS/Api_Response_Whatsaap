@@ -7,15 +7,16 @@ import funcionsbot as fn
 
 def get_response(user_input):
 
-    funcions = fn.Cal_Basic(user_input)
+    funcions = fn.funcion_Bot(user_input.lower())
     if funcions:
         return funcions
     else:
         split_message = re.split(r'\s|[,:;.?!-_]\s*', user_input.lower())
         response = check_all_messages(split_message)
         if response.startswith("http"):
-            return w.Get_information(response,user_input.lower())
+            return w.extract_information(response,user_input.lower())
         else:
+
             return response
 
 def message_probability(user_message, recognized_words, single_response=False, required_word=[]):

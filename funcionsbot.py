@@ -1,29 +1,36 @@
+import WebScraping as  func
 
-def Cal_Basic(user_input):
+
+def funcion_Bot(command):
     # CALCULADORA OPERADORES BASICOS
-    if ("+") in user_input:
-        idex = user_input.index("+")
-        valor_1= user_input[0:idex]
-        valor_2 = user_input[idex +1:]
-        total = int(valor_1) + int(valor_2)
-        return f"La suma {valor_1} + {valor_2} es igual a : {total}"
-    elif ("-") in user_input:
-        idex = user_input.index("-")
-        valor_1 = user_input[0:idex]
-        valor_2 = user_input[idex + 1:]
-        total = int(valor_1) - int(valor_2)
-        return f"La resta {valor_1} - {valor_2} es igual a : {total}"
-    elif ("*") in user_input:
-        idex = user_input.index("*")
-        valor_1 = user_input[0:idex]
-        valor_2 = user_input[idex + 1:]
-        total = int(valor_1) * int(valor_2)
-        return f"La multiplicacion {valor_1} * {valor_2} es igual a : {total}"
-    elif ("/") in user_input:
-        idex = user_input.index("/")
-        valor_1 = user_input[0:idex]
-        valor_2 = user_input[idex + 1:]
-        total = int(valor_1) / int(valor_2)
-        return f"La division {valor_1} / {valor_2} es igual a : {total}"
+    if ("+") in command:
+        idex = command.index("+")
+        valor_1= command[0:idex]
+        valor_2 = command[idex +1:]
+        total = float(valor_1.replace(",",".")) + float(valor_2.replace(",","."))
+        return f"\ud83d\udcddLa suma {valor_1} + {valor_2} es igual a : {total}"
+    elif ("-") in command:
+        idex = command.index("-")
+        valor_1 = command[0:idex]
+        valor_2 = command[idex + 1:]
+        total = float(valor_1.replace(",",".")) - float(valor_2.replace(",","."))
+        return f"\ud83d\udcddLa resta {valor_1} - {valor_2} es igual a : {total}"
+    elif ("*") in command:
+        idex = command.index("*")
+        valor_1 = command[0:idex]
+        valor_2 = command[idex + 1:]
+        total = float(valor_1.replace(",",".")) * float(valor_2.replace(",","."))
+        return f"\ud83d\udcddLa multiplicacion {valor_1} * {valor_2} es igual a : {total}"
+    elif ("/") in command:
+        idex = command.index("/")
+        valor_1 = command[0:idex]
+        valor_2 = command[idex + 1:]
+        total = float(valor_1.replace(",",".")) / float(valor_2.replace(",","."))
+        return f"\ud83d\udcddLa division {valor_1} / {valor_2} es igual a : {total}"
+    elif ("cedula") in command:
+
+        datos = func.searchID(command.replace("cedula",""))
+        return datos
+
     else:
         return False
