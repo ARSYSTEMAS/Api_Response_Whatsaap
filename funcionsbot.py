@@ -1,8 +1,11 @@
 import WebScraping as  func
+import help as  h
 
 
 def funcion_Bot(command):
     # CALCULADORA OPERADORES BASICOS
+
+    print("el comando es ",command)
     if ("+") in command:
         idex = command.index("+")
         valor_1= command[0:idex]
@@ -31,6 +34,14 @@ def funcion_Bot(command):
 
         datos = func.searchID(command.replace("cedula",""))
         return datos
+
+    elif ("ayuda") in command:
+
+        print("entro ayuda")
+        help = h.helpme_system()
+
+        print(help)
+        return help
 
     else:
         return False

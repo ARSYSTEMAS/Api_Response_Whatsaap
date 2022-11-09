@@ -3,7 +3,7 @@ requests.packages.urllib3.disable_warnings()
 from bs4 import BeautifulSoup as b
 # from decimal import Decimal, ROUND_HALF_UP
 
-today = datetime.datetime.now().date()
+today = datetime.datetime.now().strftime('%d/%m/%Y Hora: %H:%M:%S')
 
 def extract_information(url,command):
     global today
@@ -17,75 +17,110 @@ def extract_information(url,command):
                 search = soup.find("div", {"id": "dolar"}, {"class": "col-sm-12 col-xs-12"})
                 value = search.text.strip().replace("USD","").replace(" ","")
                 P = value.index(",")
-                return F'\u270d\ufe0fLa tasa VES/USD del BCV actualmente es:  {value[0:P+3]}'
-
+                return (f'BCV\n'
+                        f'\ud83d\udcb5 Bs/$ {value[0:P+3]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa monitor":
                 search = soup.find("div", {"id": "2"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
                 MONITOR = search[P + 3:I]
-                return f'\u270d\ufe0fLa tasa VES/USD de EnParaleloVzla actualmente es:    {search[P + 3:I]}'
+                return (f'ENPARALELOVZLA\n'
+                        f'\ud83d\udcb5 Bs/${search[P + 3:I]}\n'
+                        f'Fecha: {today }'
+                        )
 
             elif command == "tasa binance":
                 search = soup.find("div", {"id": "28"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Binance actualmente es:  {search[P + 3:I]}'
 
+                return (f'BINANCE\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa airtm":
                 search = soup.find("div", {"id": "31"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de AirTM actualmente es:  {search[P + 3:I]}'
 
+                return (f'AIRTM\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa localbitcoins":
                 search = soup.find("div", {"id": "29"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de LocalBitcoins actualmente es:  {search[P + 3:I]}'
 
+                return (f'LOCALBITCOINS\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa reserve":
                 search = soup.find("div", {"id": "32"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Reserve actualmente es:  {search[P + 3:I]}'
 
+                return (f'RESERVE\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa yadio":
                 search = soup.find("div", {"id": "33"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Yadio actualmente es:  {search[P + 3:I]}'
 
-            elif command == "tasa dolar today":
+                return (f'YADIO\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
+            elif command == "tasa dolartoday":
                 search = soup.find("div", {"id": "34"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de DolarToday actualmente es:  {search[P + 3:I]}'
 
+                return (f'DOLAR TODAY\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa mkambio":
                 search = soup.find("div", {"id": "36"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Mkambio actualmente es:  {search[P + 3:I]}'
 
+                return (f'MKAMBIO\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa cambios rya":
                 search = soup.find("div", {"id": "37"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Cambios RYA actualmente es:  {search[P + 3:I]}'
 
+                return (f'CAMBIOS RYA\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa paypal":
                 search = soup.find("div", {"id": "38"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de PAYPAL actualmente es:  {search[P + 3:I]}'
 
+                return (f'PAYPAL\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "tasa petro":
                 search = soup.find("div", {"id": "4"}, {"p class": "precio"}).getText()
                 P = search.index("USD")
                 I = search.index("CAMBIO")
-                return f'\u270d\ufe0fLa tasa VES/USD de Petro actualmente es:  {search[P + 3:I]}'
 
+                return (f'PETRO\n'
+                        f'\ud83d\udcb5 Bs/$ {search[P + 3:I]}\n'
+                        f'Fecha: {today}'
+                        )
             elif command == "promedio" or command == "tasas":
                 # RESERVE
                 search_1 = soup.find("div", {"id": "32"}, {"p class": "precio"}).getText()
@@ -129,16 +164,32 @@ def extract_information(url,command):
                 I_7 = search_7.index("CAMBIO")
                 ENPARALELOVZLA = search_7[P_7 + 3:I_7]
 
-                promedio = float(TASARESERVE.replace(",",".")) + float(TASAMKAMBIO.replace(",","."))  + float(TASARYA.replace(",",".")) + float(TASAAIRTM.replace(",",".")) + float(TASALOCALBITCOINS.replace(",",".")) + float(TASAYADIO.replace(",","."))
-                promedio = promedio / 6
+                # DOLARTODAY
+                search_8 = soup.find("div", {"id": "34"}, {"p class": "precio"}).getText()
+                P_8 = search_8.index("USD")
+                I_8 = search_8.index("CAMBIO")
+                DOLARTODAY = search_8[P_8 + 3:I_8]
+
+                # BINANCE
+                search_9 = soup.find("div", {"id": "28"}, {"p class": "precio"}).getText()
+                P_9 = search_9.index("USD")
+                I_9 = search_9.index("CAMBIO")
+                TASABINANCE = search_9[P_9 + 3:I_9]
+
+                promedio = float(TASARESERVE.replace(",",".")) + float(TASAMKAMBIO.replace(",","."))  + float(TASARYA.replace(",",".")) + float(TASAAIRTM.replace(",",".")) + float(TASALOCALBITCOINS.replace(",",".")) + float(TASAYADIO.replace(",","."))+ float(TASABINANCE.replace(",","."))
+                promedio = promedio / 7
                 P_P = str(promedio).index(".")
                 promedio = str(promedio)[0:P_P + 3]
 
                 if command == "promedio":
-                    return f'{today }: El promedio actual para el dolar es: ' + promedio
+
+                    return (f'PROMEDIANDO\n'
+                        f'\ud83d\udcb5 Bs/$ {promedio}\n'
+                        f'Fecha: {today}'
+                        )
                 else:
 
-                    tasas = (f'\ud83d\udcdd{today}:\n'
+                    tasas = (f'\ud83d\udcdd{today}\n'
                                      f'\ud83d\udcccRESERVE                   = {TASARESERVE}\n'
                                      f'\ud83d\udcccAIRTM                        = {TASAAIRTM}\n'
                                      f'\ud83d\udcccLOCALBITCOINS      = {TASALOCALBITCOINS}\n'
@@ -146,8 +197,9 @@ def extract_information(url,command):
                                      f'\ud83d\udcccCAMBIOS RYA          = {TASARYA}\n'
                                      f'\ud83d\udcccYADIO                        = {TASAYADIO}\n'
                                      f'\ud83d\udcccENPARALELOVZLA = {ENPARALELOVZLA}\n'
-                                     f'\ud83d\udcccENPARALELOVZLA = {ENPARALELOVZLA}\n'
-                                     f'\ud83d\udea7 Tasas Actualizada en linea \ud83d\udea7')
+                                     f'\ud83d\udcccDOLARTODAY          = {DOLARTODAY}\n'
+                                     f'\ud83d\udcccBINANCE                  = {TASABINANCE}\n'
+                                     f'\ud83d\udea7 Tasas en tiempo real \ud83d\udea7')
                     return tasas
 
 
@@ -155,62 +207,62 @@ def extract_information(url,command):
             elif command == "criptos":
 
                 # BTC
-                search_7 = soup.find("div", {"id": "BTCUSD"}, {"p class": "precio"}).getText()
-                P_7 = search_7.index("BTC")
-                I_7 = search_7.index("CAMBIO")
-                BTC = search_7[P_7 + 3:I_7]
+                search_7_crip = soup.find("div", {"id": "BTCUSD"}, {"p class": "precio"}).getText()
+                P_7_crip = search_7_crip.index("BTC")
+                I_7_crip = search_7_crip.index("CAMBIO")
+                BTC = search_7_crip[P_7_crip + 3:I_7_crip]
 
                 # Ethereum
-                search_8 = soup.find("div", {"id": "ETHUSD"}, {"p class": "precio"}).getText()
-                P_8 = search_8.index("ETH")
-                I_8 = search_8.index("CAMBIO")
-                ETH = search_8[P_8 + 3:I_8]
+                search_8_crip = soup.find("div", {"id": "ETHUSD"}, {"p class": "precio"}).getText()
+                P_8_crip = search_8_crip.index("ETH")
+                I_8_crip = search_8_crip.index("CAMBIO")
+                ETH = search_8_crip[P_8_crip + 3:I_8_crip]
 
 
                 # XRP
-                search_9 = soup.find("div", {"id": "XRPUSD"}, {"p class": "precio"}).getText()
-                P_9 = search_9.index("XRP0")
-                I_9 = search_9.index("CAMBIO")
-                XRP = search_9[P_9 + 3:I_9]
+                search_9_crip = soup.find("div", {"id": "XRPUSD"}, {"p class": "precio"}).getText()
+                P_9_crip = search_9_crip.index("XRP0")
+                I_9_crip = search_9_crip.index("CAMBIO")
+                XRP = search_9_crip[P_9_crip + 3:I_9_crip]
 
 
                 # Tether
-                search_10 = soup.find("div", {"id": "USDTUSD"}, {"p class": "precio"}).getText().replace(" ","")
-                P_10 = search_10.index("USDT")
-                I_10 = search_10.index("CAMBIO")
-                USDT = search_10[P_10 + 4:I_10]
+                search_10_crip = soup.find("div", {"id": "USDTUSD"}, {"p class": "precio"}).getText().replace(" ","")
+                P_10_crip = search_10_crip.index("USDT")
+                I_10_crip = search_10_crip.index("CAMBIO")
+                USDT = search_10_crip[P_10_crip + 4:I_10_crip]
 
                 # Dogecoin
-                search_11 = soup.find("div", {"id": "DOGEUSD"}, {"p class": "precio"}).getText().replace(" ", "")
-                P_11 = search_11.index("DOGE")
-                I_11 = search_11.index("CAMBIO")
-                DOGECOIN = search_11[P_11 + 4:I_11]
+                search_11_crip = soup.find("div", {"id": "DOGEUSD"}, {"p class": "precio"}).getText().replace(" ", "")
+                P_11_crip = search_11_crip.index("DOGE")
+                I_11_crip = search_11_crip.index("CAMBIO")
+                DOGECOIN = search_11_crip[P_11_crip + 4:I_11_crip]
 
                 # Dai
-                search_12 = soup.find("div", {"id": "DAIUSD"}, {"p class": "precio"}).getText().replace(" ", "")
-                P_12 = search_12.index("DAI")
-                I_12 = search_12.index("CAMBIO")
-                DAI = search_12[P_12 + 3:I_12]
+                search_12_crip = soup.find("div", {"id": "DAIUSD"}, {"p class": "precio"}).getText().replace(" ", "")
+                P_12_crip = search_12_crip.index("DAI")
+                I_12_crip = search_12_crip.index("CAMBIO")
+                DAI = search_12_crip[P_12_crip + 3:I_12_crip]
 
                 # SHIBA INU
-                search_13 = soup.find("div", {"id": "SHIBUSD"}, {"p class": "precio"}).getText().replace(" ", "")
-                P_13 = search_13.index("SHIB0")
-                I_13 = search_13.index("CAMBIO")
-                SHIBA = search_13[P_13 + 4:I_13]
+                search_13_crip = soup.find("div", {"id": "SHIBUSD"}, {"p class": "precio"}).getText().replace(" ", "")
+                P_13_crip = search_13_crip.index("SHIB0")
+                I_13_crip = search_13_crip.index("CAMBIO")
+                SHIBA = search_13_crip[P_13_crip + 4:I_13_crip]
 
                 # LITECOINS
-                search_14 = soup.find("div", {"id": "LTCUSD"}, {"p class": "precio"}).getText().replace(" ", "")
-                P_14 = search_14.index("LTC")
-                I_14 = search_14.index("CAMBIO")
-                LTC = search_14[P_14 + 3:I_14]
+                search_14_crip = soup.find("div", {"id": "LTCUSD"}, {"p class": "precio"}).getText().replace(" ", "")
+                P_14_crip = search_14_crip.index("LTC")
+                I_14_crip = search_14_crip.index("CAMBIO")
+                LTC = search_14_crip[P_14_crip + 3:I_14_crip]
 
                 # AXS
-                search_15 = soup.find("div", {"id": "AXSUSD"}, {"p class": "precio"}).getText().replace(" ", "")
-                P_15 = search_15.index("AXS")
-                I_15 = search_15.index("CAMBIO")
-                AXS = search_15[P_15 + 3:I_15]
+                search_15_crip = soup.find("div", {"id": "AXSUSD"}, {"p class": "precio"}).getText().replace(" ", "")
+                P_15_crip = search_15_crip.index("AXS")
+                I_15_crip = search_15_crip.index("CAMBIO")
+                AXS = search_15_crip[P_15_crip + 3:I_15_crip]
 
-                criptomonedas = (f'\ud83d\udcdd{today}:\n'
+                criptomonedas = (f'\ud83d\udcdd{today}\n'
                                  f' \ud83d\udcb9BITCOIN    = {BTC} \n '
                                  f'\ud83d\udcb9ETHERUM =  {ETH} \n '
                                  f'\ud83d\udcb9XRP           =  {XRP} \n '
@@ -220,7 +272,7 @@ def extract_information(url,command):
                                  f'\ud83d\udcb9SHIBA      =  {SHIBA} \n '
                                  f'\ud83d\udcb9LTC           =  {LTC} \n '
                                  f'\ud83d\udcb9AXS          =  {AXS} \n '
-                                 f'\ud83d\udea7 Tasas Actualizada en linea \ud83d\udea7'
+                                 f'\ud83d\udea7 Valores en tiempo real \ud83d\udea7'
                                  )
 
                 return criptomonedas
