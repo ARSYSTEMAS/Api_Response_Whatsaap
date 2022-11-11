@@ -28,8 +28,8 @@ creador,fecha_creacion,nombre_Bot,edad_bot,desc_bot = datos_Bot
 info = f'Hola mi nombre es {nombre_Bot} soy un {desc_bot} codificado a partir del dia {fecha_creacion} por {creador} '
 
 
-VERIFY_TOKEN = "anderson"
-TOKEN        = "Bearer EAAI0NrVoYQoBAMyB7NLSXDyYj1ejIIfK3Bc4A8sg3nFH0ohNEBxs6J83ZCPWJZCaAIvRFzgwkZB92v5BOyO6tUsl7b5aOGlc1RqWpDEPYtzfAmlbagpqPiIMis99cRuHIdeIKOoUDZB7xZBepqBZBHbAypXwGFPqfWfvqjICZAHrvVp8HZCsDGVh"
+VERIFY_TOKEN = ''
+TOKEN        = ''
 LINK         = ''
 
 
